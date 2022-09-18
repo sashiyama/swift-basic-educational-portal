@@ -374,6 +374,13 @@ Your account does not exist. Please try again!
 ************************************************************
 
 """
+    static let invalidStudentID = """
+
+************************************************************
+The student ID is invalid.
+************************************************************
+
+"""
     static let selectOptions = """
 
 ************************************************************
@@ -604,7 +611,14 @@ func main() {
             return
         }
 
-        guard let student = loginForm.currentStudent else {
+        var student = loginForm.currentStudent
+
+        while student == nil {
+            print(Message.invalidStudentID)
+            student = loginForm.currentStudent
+        }
+
+        guard let student = student else {
             return
         }
 
